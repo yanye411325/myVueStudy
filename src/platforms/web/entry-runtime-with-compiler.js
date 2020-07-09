@@ -6,6 +6,7 @@ import { mark, measure } from 'core/util/perf'
 
 import Vue from './runtime/index'
 import { query } from './util/index'
+// TODO 编译输出render函数
 import { compileToFunctions } from './compiler/index'
 import { shouldDecodeNewlines, shouldDecodeNewlinesForHref } from './util/compat'
 
@@ -14,14 +15,16 @@ const idToTemplate = cached(id => {
   return el && el.innerHTML
 })
 
+// TODO 声明原型方法 $mount
 const mount = Vue.prototype.$mount
 Vue.prototype.$mount = function (
-  el?: string | Element,
-  hydrating?: boolean
+  el?: string | Element, // TODO声明 el
+  hydrating?: boolean  // TODO平台
 ): Component {
   el = el && query(el)
 
   /* istanbul ignore if */
+  // TODO 不能挂载到 html 和 body 标签
   if (el === document.body || el === document.documentElement) {
     process.env.NODE_ENV !== 'production' && warn(
       `Do not mount Vue to <html> or <body> - mount to normal elements instead.`
@@ -96,6 +99,7 @@ function getOuterHTML (el: Element): string {
   }
 }
 
+// TODO 声明 compile方法
 Vue.compile = compileToFunctions
 
 export default Vue

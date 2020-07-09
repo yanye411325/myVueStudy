@@ -11,13 +11,13 @@ function Vue (options) {
   ) {
     warn('Vue is a constructor and should be called with the `new` keyword')
   }
-  this._init(options)
+  this._init(options)   // TODO 初始化
 }
 
-initMixin(Vue)
-stateMixin(Vue)
-eventsMixin(Vue)
-lifecycleMixin(Vue)
-renderMixin(Vue)
+initMixin(Vue)            // TODO 初始化混入
+stateMixin(Vue)           // TODO 初始化状态
+eventsMixin(Vue)          // TODO 初始化事件
+lifecycleMixin(Vue)       // TODO 初始化生命周期
+renderMixin(Vue)          // TODO 渲染函数
 
 export default Vue

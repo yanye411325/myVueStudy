@@ -41,13 +41,13 @@ export function initLifecycle (vm: Component) {
     parent.$children.push(vm)
   }
 
-  vm.$parent = parent
-  vm.$root = parent ? parent.$root : vm
+  vm.$parent = parent  // TODO 父组件
+  vm.$root = parent ? parent.$root : vm   // ? $root  作用
 
-  vm.$children = []
-  vm.$refs = {}
+  vm.$children = []  // TODO 子组件
+  vm.$refs = {}      // TODO 获取$refs
 
-  vm._watcher = null
+  vm._watcher = null   
   vm._inactive = null
   vm._directInactive = false
   vm._isMounted = false

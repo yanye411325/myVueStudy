@@ -25,6 +25,7 @@ const weexFactoryPlugin = {
   }
 }
 
+// TODO 配置文件映射
 const aliases = require('./alias')
 const resolve = p => {
   const base = p.split('/')[0]
@@ -120,8 +121,14 @@ const builds = {
     banner
   },
   // Runtime+compiler development build (Browser)
+  // TODO  TARGET:web-full-dev => 入口文件
   'web-full-dev': {
-    entry: resolve('web/entry-runtime-with-compiler.js'),
+    // TODO  path.resolve(aliases[base], p.slice(base.length + 1)) => 
+    // TODO  path.resolve(aliases[web],'entry-runtime-with-compiler.js')
+    // TODO  web=>resolve('src/platforms/web') 
+    //! TODO  => ../src/platforms/web/entry-runtime-with-compiler.js
+    entry: resolve('web/entry-runtime-with-compiler.js'), 
+    // TODO  => ../dist/vue.js
     dest: resolve('dist/vue.js'),
     format: 'umd',
     env: 'development',
@@ -214,6 +221,7 @@ const builds = {
 }
 
 function genConfig (name) {
+  // TODO  builds[TARGET] 对应config配置项
   const opts = builds[name]
   const config = {
     input: opts.entry,
@@ -264,6 +272,7 @@ function genConfig (name) {
 }
 
 if (process.env.TARGET) {
+  // TODO  传入TARGET
   module.exports = genConfig(process.env.TARGET)
 } else {
   exports.getBuild = genConfig

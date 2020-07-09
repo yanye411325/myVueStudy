@@ -11,11 +11,12 @@ import { initProvide, initInjections } from './inject'
 import { extend, mergeOptions, formatComponentName } from '../util/index'
 
 let uid = 0
-
+// TODO 全局混入
 export function initMixin (Vue: Class<Component>) {
   Vue.prototype._init = function (options?: Object) {
     const vm: Component = this
     // a uid
+    // TODO 组件的索引值 根组件为0
     vm._uid = uid++
 
     let startTag, endTag
@@ -49,14 +50,14 @@ export function initMixin (Vue: Class<Component>) {
     }
     // expose real self
     vm._self = vm
-    initLifecycle(vm)
-    initEvents(vm)
-    initRender(vm)
-    callHook(vm, 'beforeCreate')
-    initInjections(vm) // resolve injections before data/props
-    initState(vm)
-    initProvide(vm) // resolve provide after data/props
-    callHook(vm, 'created')
+    initLifecycle(vm)               // TODO初始化生命周期
+    initEvents(vm)                  // TODO 初始化事件
+    initRender(vm)                  // TODO 初始化render
+    callHook(vm, 'beforeCreate')    // TODO 执行beforeCreate
+    initInjections(vm)              // TODO 初始化获取injections         resolve injections before data/props
+    initState(vm)                   // TODO 初始化状态（props,data）
+    initProvide(vm)                 // TODO 初始化向下传入provide         resolve provide after data/props
+    callHook(vm, 'created')         // TODO 执行created
 
     /* istanbul ignore if */
     if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
@@ -65,6 +66,7 @@ export function initMixin (Vue: Class<Component>) {
       measure(`vue ${vm._name} init`, startTag, endTag)
     }
 
+    // TODO 执行挂载
     if (vm.$options.el) {
       vm.$mount(vm.$options.el)
     }
@@ -84,6 +86,7 @@ export function initInternalComponent (vm: Component, options: InternalComponent
   opts._renderChildren = vnodeComponentOptions.children
   opts._componentTag = vnodeComponentOptions.tag
 
+  // TODO render函数
   if (options.render) {
     opts.render = options.render
     opts.staticRenderFns = options.staticRenderFns
